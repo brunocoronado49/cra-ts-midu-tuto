@@ -3,19 +3,26 @@ import { Sub } from "../interfaces/AppInterfaces";
 
 export const Form = () => {
     const [values, setValues] = useState<Sub>({
-        nick: '',
+        nick: "",
         subMonths: 0,
-        avatar: '',
-        description: '',
+        avatar: "", 
+        description: "",
     });
 
     type HandleChange = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
-    const handleSubmit = (evt: FormEvent<HTMLFormElement>)  => {
+    const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
         evt.preventDefault();
     };
 
-    const handleChange = (evt:HandleChange ) => {}
+    const handleChange = (evt: HandleChange) => {
+        const { name, value } = evt.target;
+
+        setValues({
+            ...values,
+            [name]: value,
+        });
+    };
 
     return (
         <>
@@ -41,9 +48,8 @@ export const Form = () => {
                     placeholder="Avatar"
                     onChange={handleChange}
                 />
-                <input
+                <textarea
                     value={values.description}
-                    type="text"
                     name="description"
                     placeholder="Description"
                     onChange={handleChange}
